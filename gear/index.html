@@ -105,19 +105,22 @@ var rot2 = 6.6;
 gear1.setAttribute( 'transform', 'rotate('+ rot1 +' 70 70)' );
 gear2.setAttribute( 'transform', 'rotate('+ rot2 +' 70 70)' );
 
-document.getElementById( 'rorate_start' ).addEventListener( 'click', function() {
+var elem = document.getElementById( 'rorate_start' );
+elem.addEventListener( 'click', function() {
     if ( 0 <= timerId ) {
         clearInterval( timerId );
         timerId = -1;
-        return;
+        elem.value = "start";
     }
-
-    timerId = setInterval( function() {
-        rot1 += 0.5;
-        rot2 -= 0.5;
-        gear1.setAttribute( 'transform', 'rotate('+ rot1 +' 70 70)' );
-        gear2.setAttribute( 'transform', 'rotate('+ rot2 +' 70 70)' );
-    }, 16 );
+    else {
+        timerId = setInterval( function() {
+            rot1 += 0.5;
+            rot2 -= 0.5;
+            gear1.setAttribute( 'transform', 'rotate('+ rot1 +' 70 70)' );
+            gear2.setAttribute( 'transform', 'rotate('+ rot2 +' 70 70)' );
+        }, 16 );
+        elem.value = "stop";
+    }
 } );
 </script>
 
