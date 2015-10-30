@@ -5,6 +5,10 @@ $(document).ready(function () {
         if (navigator.requestMIDIAccess !== undefined) {
             var sample = new MyApp.MidiSample();
         }
+        else {
+            var p = $('#debug')[0];
+            p.textContent = "Sorry, WebMIDI API not supported.";
+        }
     };
 });
 var MyApp;
@@ -21,7 +25,9 @@ var MyApp;
                 _this.midiPort = item;
                 _this.storeInputs();
                 _this.storeOutputs();
-                _this.inputs[0].onmidimessage = _this.onMidiMessage;
+                if (0 < _this.inputs.length) {
+                    _this.inputs[0].onmidimessage = _this.onMidiMessage;
+                }
             }, function (access) {
                 var p = $('#debug')[0];
                 p.textContent = "Error!";

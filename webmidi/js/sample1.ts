@@ -6,6 +6,10 @@ $( document ).ready( () => {
         if ( navigator.requestMIDIAccess !== undefined ) {
             var sample = new MyApp.MidiSample();
         }
+        else {
+            var p = <HTMLParagraphElement>$( '#debug' )[0];
+            p.textContent = "Sorry, WebMIDI API not supported.";
+        }
     };
 } );
 
@@ -25,7 +29,9 @@ namespace MyApp {
                 this.storeInputs();
                 this.storeOutputs();
                 
-                this.inputs[0].onmidimessage = this.onMidiMessage;
+                if ( 0 < this.inputs.length ) {
+                    this.inputs[0].onmidimessage = this.onMidiMessage;
+                }
             }, (access: Error) => {
                 var p = <HTMLParagraphElement>$( '#debug' )[0];
                 p.textContent = "Error!";
