@@ -59,7 +59,7 @@ var MyApp;
             this.context = context;
             this.nodeOsc = this.context.createOscillator();
             this.nodeOsc.type = 'sine';
-            this.nodeOsc.frequency.value = 440; // freq
+            this.nodeOsc.frequency.value = 440;
             this.nodeGain = this.context.createGain();
             this.nodeGain.gain.value = 0.0;
             this.nodeOsc.connect(this.nodeGain);
