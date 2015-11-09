@@ -21,13 +21,13 @@ $(document).ready(function () {
     $('.note_on', 'g').each(function (i, elem) {
         touchedFlags[i] = false;
         var $elem = $(elem);
-        $elem.on('mousedown', function (eventObject) {
+        $elem.on('mousedown touchstart', function (eventObject) {
             $elem.css('fill-opacity', '1.0');
             touchedFlags[i] = true;
             synth.noteOn(i + C3);
             hasTouched = true;
         });
-        $elem.on('mouseup', function (eventObject) {
+        $elem.on('mouseup touchend', function (eventObject) {
             $elem.css('fill-opacity', '0.0');
             touchedFlags[i] = false;
             synth.noteOff(i + C3);

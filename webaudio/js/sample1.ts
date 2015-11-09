@@ -24,13 +24,13 @@ $( document ).ready( () => {
     $( '.note_on', 'g' ).each( (i:number, elem: Element) => {
         touchedFlags[i] = false;
         var $elem = $( elem );
-        $elem.on( 'mousedown', (eventObject: JQueryEventObject) => {
+        $elem.on( 'mousedown touchstart', (eventObject: JQueryEventObject) => {
             $elem.css( 'fill-opacity', '1.0' );
             touchedFlags[i] = true;
             synth.noteOn( i + C3 );
             hasTouched = true;
         } );
-        $elem.on( 'mouseup', (eventObject: JQueryEventObject) => {
+        $elem.on( 'mouseup touchend', (eventObject: JQueryEventObject) => {
             $elem.css( 'fill-opacity', '0.0' );
             touchedFlags[i] = false;
             synth.noteOff( i + C3 );
