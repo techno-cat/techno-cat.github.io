@@ -3,16 +3,15 @@
 $( document ).ready( () => {
     var elements: Element[] = $( '.note_on', 'g' ).toArray();
 
-    var btn = $( '#scan_start' );
+    var $btn = $( '#scan_start' );
     if ( navigator.requestMIDIAccess !== undefined ) {
-        btn.on( 'click', () => {
+        $btn.on( 'click', () => {
             MyApp.init( elements, 36 /* = C3 */ ); 
         } );
     }
     else {
-        btn.prop( 'disabled', true );
-        var p = <HTMLParagraphElement>$( '#debug' )[0];
-        p.textContent = "Sorry, WebMIDI API not supported.";
+        $btn.prop( 'disabled', true );
+        $( '#debug' ).text( 'Sorry, WebMIDI API not supported.' );
     }
 } );
 
