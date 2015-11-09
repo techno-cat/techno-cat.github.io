@@ -1,25 +1,26 @@
 /// <reference path="../typings/tsd.d.ts" />
 
 $( document ).ready( () => {
-    var btn = <HTMLButtonElement>$( '#scan_start' )[0];
-    btn.onclick = () => {
-        if ( navigator.requestMIDIAccess !== undefined ) {
-            var sample = new MyApp.MidiSample();
-        }
-        else {
-            var p = <HTMLParagraphElement>$( '#debug' )[0];
-            p.textContent = "Sorry, WebMIDI API not supported.";
-        }
-    };
+    var btn = $( '#scan_start' );
+    if ( navigator.requestMIDIAccess !== undefined ) {
+        btn.on( 'click', () => {
+            MyApp.init();
+        } );
+    }
+    else {
+        btn.prop( 'disabled', true );
+        var p = <HTMLParagraphElement>$( '#debug' )[0];
+        p.textContent = "Sorry, WebMIDI API not supported.";
+    }
 } );
 
 namespace MyApp {
-    export class MidiSample {
+    class MidiSample {
         private midiPort: WebMidi.MIDIAccess;
         private inputs = new Array<WebMidi.MIDIInput>();
         private outputs = new Array<WebMidi.MIDIOutput>();
 
-        constructor() {
+        public constructor() {
             var promise = navigator.requestMIDIAccess();
             promise.then( (item: WebMidi.MIDIAccess) => {
                 var p = <HTMLParagraphElement>$( '#debug' )[0];
@@ -37,7 +38,13 @@ namespace MyApp {
                 p.textContent = "Error!";
             } );
         }
-        
+
+        public disconnect() {
+            if ( 0 < this.inputs.length ) {
+                this.inputs[0].onmidimessage = null;
+            }
+        }
+
         private storeInputs() {
             var ite = this.midiPort.inputs.values();
             var ul = <HTMLUListElement>$( '#input' )[0];
@@ -80,6 +87,16 @@ namespace MyApp {
             else {
                 // nop
             }
-        };
+        }
+    }
+
+    var sample: MidiSample;
+    export function init() {
+        if ( sample ) {
+            sample.disconnect();
+            console.log( "disconnect! ");
+        }
+
+        sample = new MidiSample();
     }
 }

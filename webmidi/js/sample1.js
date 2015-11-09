@@ -1,15 +1,16 @@
 /// <reference path="../typings/tsd.d.ts" />
 $(document).ready(function () {
-    var btn = $('#scan_start')[0];
-    btn.onclick = function () {
-        if (navigator.requestMIDIAccess !== undefined) {
-            var sample = new MyApp.MidiSample();
-        }
-        else {
-            var p = $('#debug')[0];
-            p.textContent = "Sorry, WebMIDI API not supported.";
-        }
-    };
+    var btn = $('#scan_start');
+    if (navigator.requestMIDIAccess !== undefined) {
+        btn.on('click', function () {
+            MyApp.init();
+        });
+    }
+    else {
+        btn.prop('disabled', true);
+        var p = $('#debug')[0];
+        p.textContent = "Sorry, WebMIDI API not supported.";
+    }
 });
 var MyApp;
 (function (MyApp) {
@@ -33,6 +34,11 @@ var MyApp;
                 p.textContent = "Error!";
             });
         }
+        MidiSample.prototype.disconnect = function () {
+            if (0 < this.inputs.length) {
+                this.inputs[0].onmidimessage = null;
+            }
+        };
         MidiSample.prototype.storeInputs = function () {
             var ite = this.midiPort.inputs.values();
             var ul = $('#input')[0];
@@ -71,8 +77,15 @@ var MyApp;
             else {
             }
         };
-        ;
         return MidiSample;
     })();
-    MyApp.MidiSample = MidiSample;
+    var sample;
+    function init() {
+        if (sample) {
+            sample.disconnect();
+            console.log("disconnect! ");
+        }
+        sample = new MidiSample();
+    }
+    MyApp.init = init;
 })(MyApp || (MyApp = {}));
