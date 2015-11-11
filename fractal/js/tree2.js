@@ -1,10 +1,10 @@
 /// <reference path="../typings/tsd.d.ts" />
 $(document).ready(function () {
-    var btn = $('#draw_start')[0];
-    btn.onclick = function () {
+    var $btn = $('#draw_start');
+    $btn.on('click', function () {
         var canvas = $('canvas')[0];
         MyApp.startDraw(canvas);
-    };
+    });
 });
 var MyApp;
 (function (MyApp) {

@@ -1,11 +1,11 @@
 /// <reference path="../typings/tsd.d.ts" />
 
 $( document ).ready( () => {
-    var btn = <HTMLButtonElement>$( '#draw_start' )[0];
-    btn.onclick = () => {
+    var $btn = $( '#draw_start' );
+    $btn.on( 'click', () => {
         let canvas: HTMLCanvasElement = <HTMLCanvasElement>$( 'canvas' )[0];
         MyApp.startDraw( canvas );
-    };
+    } );
 } );
 
 namespace MyApp {
