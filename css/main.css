@@ -1,0 +1,53 @@
+body {
+    margin-top: 60px;
+}
+.light {
+    background: #CCC;
+    color: #333;
+}
+.dark {
+    background: #333;
+    color: #CCC;
+}
+
+.table {
+    margin-bottom: 35px;
+}
+td.description {
+    font-size: 0.8em;
+}
+th {
+    font-size: .8em;
+}
+th.title {
+    width: 120px;
+}
+
+.divider {
+    width: 100%;
+    background: #CCC;
+    height: 1px;
+    margin: 25px 0;
+}
+
+p {
+    margin-bottom: 10px;
+}
+
+.explainer {
+    color: #AAA;
+    margin-bottom: 10px;
+}
+
+ul {
+    margin-bottom: 10px;
+}
+li {
+    list-style-type: none;
+    margin-left: 10px;
+}
+
+footer {
+    text-align: center;
+    margin-bottom: 15px;
+}
