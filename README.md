@@ -4,7 +4,7 @@ techno-cat.github.io
 
 # DESCRIPTION
 
-- TypeScript/JavaScriptのようにブラウザで動くような成果物がメインです。
+- GitHubに上げた成果物をまとめています。
 - http://techno-cat.github.io/
 
 # LICENSE
