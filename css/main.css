@@ -6,27 +6,21 @@ body {
     color: #333;
 }
 .dark {
-    background:#333;
+    background: #333;
     color: #CCC;
 }
 
 .table {
-    margin-bottom:35px;
+    margin-bottom: 35px;
 }
 td.description {
-    font-size: .8em;
-}
-td.page-link {
-    font-size: .9em;
+    font-size: 0.8em;
 }
 th {
     font-size: .8em;
 }
-.table thead tr :first-child {
-    width: 160px;
-}
-.table thead tr :last-child {
-    width: 200px;
+th.title {
+    width: 120px;
 }
 
 .divider {
